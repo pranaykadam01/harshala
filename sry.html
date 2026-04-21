@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Harshala ❤️</title>
+
+<style>
+body{
+  text-align:center;
+  font-family:Arial;
+  background:linear-gradient(to right,#ff9a9e,#fad0c4);
+  padding-top:50px;
+  overflow:hidden;
+}
+
+img{
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  border:5px solid white;
+  margin-top:20px;
+}
+
+button{
+  padding:15px 25px;
+  font-size:18px;
+  background:#ff4d6d;
+  color:white;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+h1,h2,p{
+  color:white;
+}
+
+#progressBox{
+  width:80%;
+  height:30px;
+  border:2px solid white;
+  border-radius:20px;
+  margin:auto;
+  overflow:hidden;
+  display:none;
+}
+
+#progressBar{
+  width:0%;
+  height:100%;
+  background:#ff4d6d;
+  border-radius:20px;
+  transition:0.3s;
+}
+
+#downloadText{
+  color:white;
+  font-size:20px;
+  display:none;
+  margin-top:20px;
+}
+
+#nextBtn{
+  display:none;
+}
+
+#photoSection{
+  display:none;
+}
+
+.photo{
+  width:240px;
+  height:240px;
+  border-radius:20px;
+  border:4px solid white;
+  margin-top:20px;
+}
+
+#messagePage{
+  display:none;
+  margin-top:30px;
+  padding:20px;
+}
+
+#finalMsg{
+  font-size:22px;
+  color:white;
+  margin-top:20px;
+}
+
+.heart{
+  position:fixed;
+  color:red;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-800px);}
+}
+</style>
+
+</head>
+<body>
+
+<h1>For Harshala 💖</h1>
+
+<!-- FIRST PHOTO -->
+<img src="photo.jpg" alt="Harshala">
+
+<p>You look very cute in your photos 📸✨</p>
+
+<button id="startBtn" onclick="startDownload()">Tap Here</button>
+
+<!-- Download text -->
+<h2 id="downloadText">Downloading... Cuteness Overloaded 😭💖</h2>
+
+<!-- Progress Bar -->
+<div id="progressBox">
+  <div id="progressBar"></div>
+</div>
+
+<!-- Next Button -->
+<button id="nextBtn" onclick="showPhotos()">Next ➡️</button>
+
+<!-- Photo Section -->
+<div id="photoSection">
+  <h2>Her Cute Photos 😍</h2>
+
+  <img class="photo" id="slider" src="pic1.jpg">
+
+  <br>
+  <button onclick="nextPhoto()">Next Photo 📸</button>
+
+  <p id="photoCount" style="color:white;font-size:18px;"></p>
+</div>
+
+<!-- MESSAGE PAGE -->
+<div id="messagePage">
+  <h2 style="color:white;">A Message For You ❤️</h2>
+
+  <div id="finalMsg"></div>
+
+  <button onclick="finalSurprise()">Forgive Me 💖</button>
+
+  <div id="loveMsg" style="margin-top:25px;color:white;font-size:22px;"></div>
+</div>
+
+<!-- Background music -->
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let progress = 0;
+
+// ADD HER PHOTOS NAMES HERE
+let photos = ["1.jpg","2.jpg","3.jpg","4.jpg"]; 
+let index = 0;
+
+function startDownload(){
+  document.getElementById("startBtn").style.display="none";
+  document.getElementById("downloadText").style.display="block";
+  document.getElementById("progressBox").style.display="block";
+
+  let interval = setInterval(()=>{
+    progress += 5;
+    document.getElementById("progressBar").style.width = progress + "%";
+
+    if(progress >= 100){
+      clearInterval(interval);
+      document.getElementById("downloadText").innerHTML="Download Completed ✅💖";
+      document.getElementById("nextBtn").style.display="inline-block";
+    }
+  }, 200);
+}
+
+function showPhotos(){
+  document.getElementById("downloadText").style.display="none";
+  document.getElementById("progressBox").style.display="none";
+  document.getElementById("nextBtn").style.display="none";
+
+  document.getElementById("photoSection").style.display="block";
+  document.getElementById("photoCount").innerHTML = "Photo 1 of " + photos.length;
+}
+
+function nextPhoto(){
+  index++;
+
+  // if finished last photo -> go to message page
+  if(index >= photos.length){
+    document.getElementById("photoSection").style.display="none";
+    document.getElementById("messagePage").style.display="block";
+
+    document.getElementById("finalMsg").innerHTML =
+    "Harshala ❤️ <br><br>\
+    I'm really really sorry 😔💔 <br>\
+    I know I made a mistake and I accept it completely. <br><br>\
+    You are not just a person to me... you are my happiness 🥺💕 <br>\
+    I never wanted to hurt you, but I did...  <br><br>\
+    I promise I wont do that  , I will understand you more, and I will never repeat it again 🌸 <br><br>\
+    I care for you a lot, more than you think 💖 <br>\
+    Your smile is the most beautiful thing in my life 😊✨ <br><br>\
+    Please forgive me Harshala... <br>\
+    Can we restart again? 🌹❤️";
+
+    return;
+  }
+
+  document.getElementById("slider").src = photos[index];
+  document.getElementById("photoCount").innerHTML = "Photo " + (index+1) + " of " + photos.length;
+}
+
+function finalSurprise(){
+  document.getElementById("loveMsg").innerHTML =
+  "Thank you Harshala 💖 <br><br>\
+  You are my happiness 🥺✨ <br>\
+  I promise I will always respect you and care for you 🌸 <br><br>\
+  I Love You So Much 💖🌹";
+
+  // extra hearts effect
+  setInterval(()=>{
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="💘";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*30+15)+"px";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{heart.remove();},5000);
+  },200);
+}
+
+// floating hearts background
+setInterval(function(){
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💖";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(Math.random()*20+10)+"px";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{heart.remove();},5000);
+},300);
+</script>
+
+</body>
+</html>
